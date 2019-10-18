@@ -1,0 +1,29 @@
+{
+  "name": "spider",
+  "version": "1.0.0",
+  "description": "Web crawler implementation for Monzo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marlonbernardes/spider.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marlonbernardes/spider/issues"
+  },
+  "homepage": "https://github.com/marlonbernardes/spider#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  }
+}
