@@ -4,7 +4,11 @@
   "description": "Web crawler implementation for Monzo",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node --inspect -r ts-node/register ./src/index.ts",
+    "start:watch": "nodemon",
+    "test": "jest",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -19,11 +23,26 @@
   "homepage": "https://github.com/marlonbernardes/spider#readme",
   "dependencies": {},
   "devDependencies": {
+    "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "^2.4.0",
+    "@typescript-eslint/parser": "^2.4.0",
     "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "reflect-metadata": "^0.1.13",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
-    "tslint": "^5.20.0",
     "typescript": "^3.6.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      ".git",
+      "node_modules"
+    ],
+    "watch": ["src"],
+    "exec": "yarn start",
+    "ext": "ts"
   }
 }
