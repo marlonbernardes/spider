@@ -15,8 +15,8 @@
     "type": "git",
     "url": "git+https://github.com/marlonbernardes/spider.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Monzo", "Web crawler", "Crawler", "Spider", "interview"],
+  "author": "Marlon Bernardes <marlonjb.cb@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/marlonbernardes/spider/issues"
