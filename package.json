@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Web crawler implementation for Monzo",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "start": "node --inspect -r ts-node/register ./src/index.ts",
+    "build": "tsc -p agent/tsconfig.json",
+    "start": "node --inspect -r ts-node/register ./agent/src/index.ts",
     "start:watch": "nodemon",
     "test": "jest",
     "lint": "eslint ."
@@ -41,7 +42,7 @@
       ".git",
       "node_modules"
     ],
-    "watch": ["src"],
+    "watch": ["agent"],
     "exec": "yarn start",
     "ext": "ts"
   }
