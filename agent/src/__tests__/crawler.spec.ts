@@ -72,42 +72,39 @@ describe('crawler', () => {
   })
 
   describe('when crawling an URL', () => {
-    it('should return the text content of the corresponding page', () => {
-      expect(
-        crawler.crawl('http://example.com/a.html')
-      )
-        .toEqual(Promise.resolve({
+    it('should return the text content of the corresponding page', async () => {
+      const response = await crawler.crawl('http://example.com/a.html')
+      expect(response)
+        .toEqual({
           parsed: true,
           links: [],
           textContent: 'this is a test page',
           keywords: []
-        }))
+        })
     })
 
-    it('should use the parser for the corresponding content type', () => {
-      expect(
-        crawler.crawl('http://example.com/b.json')
-      )
-        .toEqual(Promise.resolve({
+    it('should use the parser for the corresponding content type', async () => {
+      const response = await crawler.crawl('http://example.com/b.json')
+      expect(response)
+        .toEqual({
           parsed: true,
           links: [],
           textContent: MOCK_JSON_RESPONSE,
           keywords: []
-        }))
+        })
     })
   })
 
   describe('when no parser has been found for the content type', () => {
-    it('should return a property "parsed" with "false" as value', () => {
-      expect(
-        crawler.crawl('http://example.com/c.md')
-      )
-        .toEqual(Promise.resolve({
+    it('should return a property "parsed" with "false" as value', async () => {
+      const response = await crawler.crawl('http://example.com/c.md')
+      expect(response)
+        .toEqual({
           parsed: false,
           links: [],
           textContent: '',
           keywords: []
-        }))
+        })
     })
   })
 })
