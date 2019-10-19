@@ -3,32 +3,45 @@
   "version": "1.0.0",
   "description": "Web crawler implementation for Monzo",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "tsc",
-    "start": "node --inspect -r ts-node/register ./src/index.ts",
+    "build": "tsc -p agent/tsconfig.json",
+    "start": "node --inspect -r ts-node/register ./agent/src/index.ts",
     "start:watch": "nodemon",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint ./agent/ --config ./agent/eslintrc.yml --ext .ts",
+    "lint:help": "eslint --help"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marlonbernardes/spider.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Monzo",
+    "Web crawler",
+    "Crawler",
+    "Spider",
+    "interview"
+  ],
+  "author": "Marlon Bernardes <marlonjb.cb@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/marlonbernardes/spider/issues"
   },
   "homepage": "https://github.com/marlonbernardes/spider#readme",
-  "dependencies": {},
+  "dependencies": {
+    "mime-types": "^2.1.24"
+  },
   "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "@types/mime-types": "^2.1.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.19.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.4",
     "reflect-metadata": "^0.1.13",
@@ -41,7 +54,9 @@
       ".git",
       "node_modules"
     ],
-    "watch": ["src"],
+    "watch": [
+      "agent"
+    ],
     "exec": "yarn start",
     "ext": "ts"
   }
