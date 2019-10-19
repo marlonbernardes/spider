@@ -1,4 +1,5 @@
 import { lookup } from 'mime-types'
+import { OK } from 'http-status'
 import Crawler, { Parsers } from '../crawler'
 import { HttpClient, HttpResponse } from '../lib/http'
 import { Parser, ParsedResponse } from '../lib/parser'
@@ -8,7 +9,7 @@ const MOCK_JSON_RESPONSE = '{ "foo": "bar" }'
 
 class MockHttpClient implements HttpClient {
 
-  get (url: string): HttpResponse {
+  async get (url: string): Promise<HttpResponse> {
     const contentType = lookup(url) || 'text/html'
     const contentByType = {
       'text/html': MOCK_HTML_RESPONSE,
@@ -16,6 +17,7 @@ class MockHttpClient implements HttpClient {
     }
     return {
       contentType,
+      status: OK,
       content: contentByType[contentType]
     }
   }
@@ -74,24 +76,24 @@ describe('crawler', () => {
       expect(
         crawler.crawl('http://example.com/a.html')
       )
-        .toEqual({
+        .toEqual(Promise.resolve({
           parsed: true,
           links: [],
           textContent: 'this is a test page',
           keywords: []
-        })
+        }))
     })
 
     it('should use the parser for the corresponding content type', () => {
       expect(
         crawler.crawl('http://example.com/b.json')
       )
-        .toEqual({
+        .toEqual(Promise.resolve({
           parsed: true,
           links: [],
           textContent: MOCK_JSON_RESPONSE,
           keywords: []
-        })
+        }))
     })
   })
 
@@ -100,12 +102,12 @@ describe('crawler', () => {
       expect(
         crawler.crawl('http://example.com/c.md')
       )
-        .toEqual({
+        .toEqual(Promise.resolve({
           parsed: false,
           links: [],
           textContent: '',
           keywords: []
-        })
+        }))
     })
   })
 })

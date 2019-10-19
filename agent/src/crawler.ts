@@ -11,8 +11,8 @@ export default class Crawler {
 
   constructor (private http: HttpClient, private parsers: Parsers) {}
 
-  crawl (url: string) {
-    const response = this.http.get(url)
+  async crawl (url: string) {
+    const response = await this.http.get(url)
     const parser = this.parsers[response.contentType] || Crawler.NO_OP_PARSER
     return parser.parse(response.content)
   }

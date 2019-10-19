@@ -1,9 +1,9 @@
 export interface HttpResponse {
-  // @TODO: Convert from string to stream? e.g Readable<string>
   content: string
   contentType: string
+  status: number
 }
 
 export interface HttpClient {
-  get (url: string): HttpResponse
+  get (url: string): Promise<HttpResponse>
 }
