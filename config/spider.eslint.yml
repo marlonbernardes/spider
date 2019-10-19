@@ -1,0 +1,123 @@
+extends:
+  - "airbnb-base"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:jest/recommended"
+
+plugins:
+  - "@typescript-eslint"
+  - "jest"
+
+rules:
+  # Set maximum line length to 140 characters wide
+  "max-len": [error, 140]
+
+  # Disabling rule, as no style is defined to determine if curly braces should be in a new line or not
+  "object-curly-newline": off
+
+  # Allow parameters to be defined in the constructor
+  "@typescript-eslint/no-parameter-properties": off
+
+  # Lines are expected between class members (e.g methods)
+  # The only exception are for single line members (such as properties)
+  "lines-between-class-members":
+    - error
+    - always
+    - exceptAfterSingleLine: true
+
+  # Return types for functions do not need to be specified
+  "@typescript-eslint/explicit-function-return-type": off
+
+  # Allows a max of 2 consecutive empty lines, but only one if its the end of a file
+  "no-multiple-empty-lines":
+    - error
+    - max: 2
+      maxEOF: 1
+
+  # Perhaps the most controversial rule. Should blocks/classes be padded with blank lines?
+  "padded-blocks":
+    - error
+    - classes: always
+      blocks: never
+
+  # Forbid extraneous trailling commas
+  "comma-dangle": [error, never]
+
+  # Disallow semicolons (default semi rule is disabled as it report incorrect errors)
+  "@typescript-eslint/semi": [error, never]
+  "semi": off
+
+  # Require 2-spaces indentation
+  "@typescript-eslint/indent": [error, 2]
+
+  # Disallow unused vars (default rule is disabled as it reports incorrect errors)
+  "@typescript-eslint/no-unused-vars":
+    - error
+  "no-unused-vars": off
+
+  # Enforce array syntax to be string[] instead of Array<string>
+  "@typescript-eslint/array-type": 
+    - error
+    - default: array
+
+  # Member properties (e.g of a type or interface) should be separated by a line break (instead of a colon or semicolon)
+  "@typescript-eslint/member-delimiter-style":
+    - error
+    - multiline:
+        delimiter: none
+
+  # Enforce camelCase for variable names
+  "@typescript-eslint/camelcase":
+    - error
+  "camelcase": off
+
+  # Require a space before function parentheses (when defining a function)
+  "space-before-function-paren": [error, always]
+
+  # Dont allow spaces when calling a function
+  "@typescript-eslint/func-call-spacing": [error]
+  "func-call-spacing": off
+
+  # Prefer "for of" over indexed for loop
+  "@typescript-eslint/prefer-for-of": [error]
+
+  # Both types and interfaces should be accepted
+  "@typescript-eslint/prefer-interface": off
+
+  # Else return is not really needed, but it doesn't cause any harm IMO
+  "no-else-return": off
+
+  # Rule disabled, as named imports (more often than not) are more clear than default exports
+  "import/prefer-default-export": off
+
+  # Allow class methods not to contain any "this" reference
+  "class-methods-use-this": off
+
+  # Non-typescript rule "no-useless-constructor" may report false positives with typescript constructors.
+  # See https://github.com/typescript-eslint/typescript-eslint/issues/48
+  "@typescript-eslint/no-useless-constructor": [error]
+  "no-useless-constructor": off
+
+  # Non-typescript rule "no-empty-function" may report false positives with typescript constructors.
+  # See https://github.com/typescript-eslint/typescript-eslint/issues/48
+  "@typescript-eslint/no-empty-function":
+    - error
+    - allow: [constructors]
+  "no-empty-function": off
+
+  # Airbnb also disables for of for no good reason.
+  # We allow it to be used in our code.
+  # See https://github.com/airbnb/javascript/issues/1271
+  "no-restricted-syntax":
+    - error
+    - ForInStatement
+    - LabeledStatement
+    - WithStatement
+
+# Relax some rules for test files
+overrides:
+  - files: ["*.spec.ts", "bin/*.ts"]
+    rules:
+      "@typescript-eslint/no-explicit-any": off
+      "@typescript-eslint/camelcase": off
+      "no-console": off
+
