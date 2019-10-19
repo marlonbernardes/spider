@@ -8,7 +8,7 @@ describe('NoOpParser', () => {
   })
 
   it('should return the value "false" for the "parsed" field', () => {
-    const response = parser.parse('content')
+    const response = parser.parse()
     expect(response).toEqual({
       parsed: false,
       textContent: expect.anything(),
@@ -18,7 +18,7 @@ describe('NoOpParser', () => {
   })
 
   it('should return an empty array of keywords and links', () => {
-    const response = parser.parse('content')
+    const response = parser.parse()
     expect(response).toEqual({
       parsed: expect.anything(),
       textContent: expect.anything(),
@@ -28,7 +28,7 @@ describe('NoOpParser', () => {
   })
 
   it('should return an empty string as the textual content', () => {
-    const response = parser.parse('content')
+    const response = parser.parse()
     expect(response).toEqual({
       parsed: expect.anything(),
       textContent: '',

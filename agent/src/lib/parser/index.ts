@@ -1,4 +1,5 @@
 import NoOpParser from './NoOpParser'
+import HtmlParser from './HtmlParser'
 
 export interface ParsedResponse {
   parsed: boolean
@@ -12,5 +13,6 @@ export interface Parser {
 }
 
 export {
-  NoOpParser
+  NoOpParser,
+  HtmlParser
 }

@@ -1,4 +1,5 @@
 import { lookup } from 'mime-types'
+import { OK } from 'http-status'
 import Crawler, { Parsers } from '../crawler'
 import { HttpClient, HttpResponse } from '../lib/http'
 import { Parser, ParsedResponse } from '../lib/parser'
@@ -8,7 +9,7 @@ const MOCK_JSON_RESPONSE = '{ "foo": "bar" }'
 
 class MockHttpClient implements HttpClient {
 
-  get (url: string): HttpResponse {
+  async get (url: string): Promise<HttpResponse> {
     const contentType = lookup(url) || 'text/html'
     const contentByType = {
       'text/html': MOCK_HTML_RESPONSE,
@@ -16,6 +17,7 @@ class MockHttpClient implements HttpClient {
     }
     return {
       contentType,
+      status: OK,
       content: contentByType[contentType]
     }
   }
@@ -70,10 +72,9 @@ describe('crawler', () => {
   })
 
   describe('when crawling an URL', () => {
-    it('should return the text content of the corresponding page', () => {
-      expect(
-        crawler.crawl('http://example.com/a.html')
-      )
+    it('should return the text content of the corresponding page', async () => {
+      const response = await crawler.crawl('http://example.com/a.html')
+      expect(response)
         .toEqual({
           parsed: true,
           links: [],
@@ -82,10 +83,9 @@ describe('crawler', () => {
         })
     })
 
-    it('should use the parser for the corresponding content type', () => {
-      expect(
-        crawler.crawl('http://example.com/b.json')
-      )
+    it('should use the parser for the corresponding content type', async () => {
+      const response = await crawler.crawl('http://example.com/b.json')
+      expect(response)
         .toEqual({
           parsed: true,
           links: [],
@@ -96,10 +96,9 @@ describe('crawler', () => {
   })
 
   describe('when no parser has been found for the content type', () => {
-    it('should return a property "parsed" with "false" as value', () => {
-      expect(
-        crawler.crawl('http://example.com/c.md')
-      )
+    it('should return a property "parsed" with "false" as value', async () => {
+      const response = await crawler.crawl('http://example.com/c.md')
+      expect(response)
         .toEqual({
           parsed: false,
           links: [],
