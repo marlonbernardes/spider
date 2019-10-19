@@ -1,7 +1,7 @@
+import { lookup } from 'mime-types'
 import Crawler, { Parsers } from '../crawler'
 import { HttpClient, HttpResponse } from '../lib/http'
 import { Parser, ParsedResponse } from '../lib/parser'
-import { lookup } from 'mime-types'
 
 const MOCK_HTML_RESPONSE = '<html><body>this is a test page</body></html>'
 const MOCK_JSON_RESPONSE = '{ "foo": "bar" }'
@@ -19,6 +19,7 @@ class MockHttpClient implements HttpClient {
       content: contentByType[contentType]
     }
   }
+
 }
 
 class MockHtmlParser implements Parser {
@@ -33,6 +34,7 @@ class MockHtmlParser implements Parser {
 
     return response
   }
+
 }
 
 class MockJsonParser implements Parser {
@@ -47,9 +49,9 @@ class MockJsonParser implements Parser {
 
     return response
   }
+
 }
 describe('crawler', () => {
-
   let crawler: Crawler
   let http: HttpClient
   let htmlParser: MockHtmlParser
@@ -70,39 +72,40 @@ describe('crawler', () => {
   describe('when crawling an URL', () => {
     it('should return the text content of the corresponding page', () => {
       expect(
-        crawler.crawl('http://example.com/a.html'))
-          .toEqual({
-            parsed: true,
-            links: [],
-            textContent: 'this is a test page',
-            keywords: []
-          })
+        crawler.crawl('http://example.com/a.html')
+      )
+        .toEqual({
+          parsed: true,
+          links: [],
+          textContent: 'this is a test page',
+          keywords: []
+        })
     })
 
     it('should use the parser for the corresponding content type', () => {
       expect(
-        crawler.crawl('http://example.com/b.json'))
-          .toEqual({
-            parsed: true,
-            links: [],
-            textContent: MOCK_JSON_RESPONSE,
-            keywords: []
-          })
+        crawler.crawl('http://example.com/b.json')
+      )
+        .toEqual({
+          parsed: true,
+          links: [],
+          textContent: MOCK_JSON_RESPONSE,
+          keywords: []
+        })
     })
   })
 
   describe('when no parser has been found for the content type', () => {
-    it ('should return a property "parsed" with "false" as value', () => {
+    it('should return a property "parsed" with "false" as value', () => {
       expect(
-        crawler.crawl('http://example.com/c.md'))
-          .toEqual({
-            parsed: false,
-            links: [],
-            textContent: '',
-            keywords: []
-          })
+        crawler.crawl('http://example.com/c.md')
+      )
+        .toEqual({
+          parsed: false,
+          links: [],
+          textContent: '',
+          keywords: []
+        })
     })
   })
-
-
 })

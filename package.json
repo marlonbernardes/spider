@@ -9,7 +9,7 @@
     "start": "node --inspect -r ts-node/register ./agent/src/index.ts",
     "start:watch": "nodemon",
     "test": "jest",
-    "lint": "eslint ./agent/ --config ./agent/eslintrc.yml",
+    "lint": "eslint ./agent/ --config ./agent/eslintrc.yml --ext .ts",
     "lint:help": "eslint --help"
   },
   "repository": {

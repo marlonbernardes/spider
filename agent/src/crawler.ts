@@ -16,6 +16,7 @@ class NoOpParser implements Parser {
     }
     return response
   }
+
 }
 
 
@@ -23,11 +24,12 @@ export default class Crawler {
 
   static NO_OP_PARSER = new NoOpParser()
 
-  constructor(private http: HttpClient, private parsers: Parsers) {}
+  constructor (private http: HttpClient, private parsers: Parsers) {}
 
   crawl (url: string) {
     const response = this.http.get(url)
     const parser = this.parsers[response.contentType] || Crawler.NO_OP_PARSER
     return parser.parse(response.content)
   }
+
 }
