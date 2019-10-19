@@ -1,3 +1,5 @@
+import NoOpParser from './NoOpParser'
+
 export interface ParsedResponse {
   parsed: boolean
   links: string[]
@@ -6,8 +8,9 @@ export interface ParsedResponse {
 }
 
 export interface Parser {
-
-  // @TODO convert to Readable<string>?
   parse (content: string): ParsedResponse
 }
 
+export {
+  NoOpParser
+}

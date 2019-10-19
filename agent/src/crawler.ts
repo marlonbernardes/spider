@@ -1,24 +1,9 @@
 import { HttpClient } from './lib/http'
-import { Parser, ParsedResponse } from './lib/parser'
+import { Parser, NoOpParser } from './lib/parser'
 
 export type Parsers = {
   [contentType: string]: Parser
 }
-
-class NoOpParser implements Parser {
-
-  parse (content: string) {
-    const response: ParsedResponse = {
-      parsed: false,
-      textContent: '',
-      links: [],
-      keywords: []
-    }
-    return response
-  }
-
-}
-
 
 export default class Crawler {
 

@@ -120,4 +120,5 @@ overrides:
       "@typescript-eslint/no-explicit-any": off
       "@typescript-eslint/camelcase": off
       "no-console": off
+      "max-classes-per-file": off
 
