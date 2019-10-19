@@ -1,5 +1,5 @@
-import DefaultHttpClient from '../DefaultHttpClient'
 import { OK, NOT_FOUND } from 'http-status'
+import DefaultHttpClient from '../DefaultHttpClient'
 
 describe('DefaultHttpClient', () => {
   let client: DefaultHttpClient

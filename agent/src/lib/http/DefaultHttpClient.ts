@@ -1,5 +1,5 @@
-import { HttpClient, HttpResponse } from '../http'
 import axios from 'axios'
+import { HttpClient, HttpResponse } from '.'
 
 export default class DefaultHttpClient implements HttpClient {
 
@@ -19,4 +19,5 @@ export default class DefaultHttpClient implements HttpClient {
       contentType
     }
   }
+
 }
