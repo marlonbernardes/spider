@@ -23,7 +23,11 @@ export default class HtmlParser implements Parser {
     $(options.linksSelector).each((_, el) => {
       const link = $(el).attr('href')
       const url = new URL(link, options.baseDomain)
-      links.push(url.href)
+      const baseDomain = new URL(options.baseDomain)
+
+      if (options.includeExternalLinks || url.host === baseDomain.host) {
+        links.push(url.href)
+      }
     })
 
     return links

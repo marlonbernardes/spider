@@ -14,11 +14,12 @@ export default class Crawler {
 
   async crawl (url: string) {
     const response = await this.http.get(url)
-    const { host } = new URL(url)
+    const { host, protocol } = new URL(url)
     const parser = this.parsers[response.contentType] || Crawler.NO_OP_PARSER
     return parser.parse(response.content, {
       linksSelector: settings.linksSelector,
-      baseDomain: host
+      baseDomain: `${protocol}//${host}`,
+      includeExternalLinks: settings.includeExternalLinks
     })
   }
 

@@ -10,7 +10,8 @@ describe('HtmlParser', () => {
     parser = new HtmlParser()
     options = {
       linksSelector: '[href]',
-      baseDomain: 'http://example.com'
+      baseDomain: 'http://example.com',
+      includeExternalLinks: true
     }
   })
 
@@ -62,6 +63,24 @@ describe('HtmlParser', () => {
           'http://example.com/second',
           'http://example.com/third',
           'http://test.com/'
+        ],
+        keywords: expect.anything()
+      })
+    })
+
+    it('should be possible to specify which URLs should be crawled', () => {
+      const html = fs.readFileSync(`${__dirname}/fixtures/multiple-anchor-urls.html`, 'utf8')
+      const response = parser.parse(html, {
+        ...options,
+        includeExternalLinks: false
+      })
+      expect(response).toEqual({
+        parsed: true,
+        textContent: expect.anything(),
+        links: [
+          'http://example.com/first',
+          'http://example.com/second',
+          'http://example.com/third'
         ],
         keywords: expect.anything()
       })
