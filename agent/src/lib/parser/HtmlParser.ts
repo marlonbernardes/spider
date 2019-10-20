@@ -1,13 +1,12 @@
 import * as cheerio from 'cheerio'
-import settings from '../../config/settings'
 
-import { Parser, ParsedResponse } from '.'
+import { Parser, ParsedResponse, ParsingOptions } from '.'
 
 export default class HtmlParser implements Parser {
 
-  parse (html: string) {
+  parse (html: string, options: ParsingOptions) {
     const $ = cheerio.load(html)
-    const links = this.extractLinks($)
+    const links = this.extractLinks($, options)
 
     const response: ParsedResponse = {
       parsed: true,
@@ -18,11 +17,13 @@ export default class HtmlParser implements Parser {
     return response
   }
 
-  private extractLinks ($: CheerioStatic) {
+  private extractLinks ($: CheerioStatic, options: ParsingOptions) {
     const links: string[] = []
-    $(settings.linksSelector).each((_, el) => {
+
+    $(options.linksSelector).each((_, el) => {
       const link = $(el).attr('href')
-      links.push(link)
+      const url = new URL(link, options.baseDomain)
+      links.push(url.href)
     })
 
     return links

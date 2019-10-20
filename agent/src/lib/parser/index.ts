@@ -9,7 +9,12 @@ export interface ParsedResponse {
 }
 
 export interface Parser {
-  parse (content: string): ParsedResponse
+  parse (content: string, options: ParsingOptions): ParsedResponse
+}
+
+export type ParsingOptions = {
+  baseDomain: string
+  linksSelector: string
 }
 
 export {
