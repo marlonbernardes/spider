@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio'
+import { isInternalUrl, normaliseUrl } from './utils'
 
 import { Parser, ParsedResponse, ParsingOptions } from '.'
 
@@ -21,12 +22,10 @@ export default class HtmlParser implements Parser {
     const links: string[] = []
 
     $(options.linksSelector).each((_, el) => {
-      const link = $(el).attr('href')
-      const url = new URL(link, options.baseDomain)
-      const baseDomain = new URL(options.baseDomain)
+      const href = $(el).attr('href')
 
-      if (options.includeExternalLinks || url.host === baseDomain.host) {
-        links.push(url.href)
+      if (options.includeExternalLinks || isInternalUrl(href, options.baseDomain)) {
+        links.push(normaliseUrl(href, options.baseDomain))
       }
     })
 
