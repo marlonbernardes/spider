@@ -3,12 +3,7 @@ import 'dotenv/config'
 const { env } = process
 
 export type CrawlerSettings = {
-  // css selector used to obtain the links
-  // contained in a certain page
   linksSelector: string
-
-  // indicates if links to different hosts should be included
-  // when fetching the child links
   includeExternalLinks: boolean
 }
 
