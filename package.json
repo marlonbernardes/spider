@@ -30,9 +30,12 @@
   },
   "homepage": "https://github.com/marlonbernardes/spider#readme",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.4.0",
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "http-status": "^1.4.0",
+    "ioredis": "^4.14.1",
+    "kafkajs": "^1.11.0",
     "mime-types": "^2.1.24"
   },
   "devDependencies": {
@@ -40,6 +43,7 @@
     "@types/jest": "^24.0.19",
     "@types/mime-types": "^2.1.0",
     "@types/node": "^12.11.1",
+    "@types/ioredis": "^4.0.18",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
     "eslint": "^6.5.1",
