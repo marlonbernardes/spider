@@ -17,8 +17,7 @@ export type KafkaSettings = {
   topicName: string
   groupId: string
   clientId: string
-  host: string
-  port: number
+  brokers: string[]
 }
 
 export type Settings = {
@@ -35,11 +34,10 @@ const settings: Settings = {
   },
 
   queue: {
-    topicName: 'foo',
-    groupId: 'test',
-    clientId: 'test',
-    host: 'localhost',
-    port: 9092
+    topicName: 'test',
+    groupId: 'spider-crawling-group',
+    clientId: 'crawling-agent-1',
+    brokers: ['localhost:9092']
   },
 
   cache: {

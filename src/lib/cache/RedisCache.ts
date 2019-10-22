@@ -1,4 +1,5 @@
 import IORedis from 'ioredis'
+import { RedisSettings } from '../../config/settings'
 import { VisitedPagesCache } from './'
 
 export class RedisCache implements VisitedPagesCache {
@@ -7,9 +8,8 @@ export class RedisCache implements VisitedPagesCache {
 
   client: IORedis.Redis
 
-  constructor() {
-    // @TODO settings
-    this.client = new IORedis(6379)
+  constructor(settings: RedisSettings) {
+    this.client = new IORedis(settings.port, settings.host)
   }
 
   async markAsVisited (url: string) {
