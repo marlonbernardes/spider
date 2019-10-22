@@ -1,11 +1,11 @@
 import Crawler from './crawler'
 import { save } from './es'
-import { CrawlingQueue, InMemoryCrawlingQueue } from './lib/queue'
+import { CrawlingQueue, KafkaCrawlingQueue } from './lib/queue'
 import { VisitedPagesCache, RedisCache } from './lib/cache'
 import settings from './config/settings'
 
-const cache: VisitedPagesCache = new RedisCache()
-const queue: CrawlingQueue = new InMemoryCrawlingQueue()
+const cache: VisitedPagesCache = new RedisCache(settings.cache)
+const queue: CrawlingQueue = new KafkaCrawlingQueue(settings.queue)
 const crawler = new Crawler(settings.crawler)
 
 async function process (url: string) {

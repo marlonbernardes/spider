@@ -1,3 +1,7 @@
+import 'dotenv/config'
+
+const { env } = process
+
 export type CrawlerSettings = {
   // css selector used to obtain the links
   // contained in a certain page
@@ -27,22 +31,21 @@ export type Settings = {
 }
 
 const settings: Settings = {
-
   crawler: {
-    linksSelector: '[href]',
-    includeExternalLinks: false,
+    linksSelector: env.CRAWLER_LINKS_SELECTOR,
+    includeExternalLinks: env.CRAWLER_INCLUDE_EXTERNAL_LINKS.toLowerCase() === 'true'
   },
 
   queue: {
-    topicName: 'test',
-    groupId: 'spider-crawling-group',
-    clientId: 'crawling-agent-1',
-    brokers: ['localhost:9092']
+    topicName: env.KAFKA_TOPIC_NAME,
+    groupId: env.KAFKA_GROUP_ID,
+    clientId: env.KAFKA_CLIENT_ID,
+    brokers: env.KAFKA_BROKERS.split(';')
   },
 
   cache: {
-    host: 'localhost',
-    port: 6379
+    host: env.REDIS_HOST,
+    port: Number(env.REDIS_PORT)
   }
 }
 
