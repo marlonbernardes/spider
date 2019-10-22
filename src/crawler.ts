@@ -1,6 +1,6 @@
-import { HttpClient } from './lib/http'
+import { HttpClient, DefaultHttpClient } from './lib/http'
 import { Parser, NoOpParser } from './lib/parser'
-import settings from './config/settings'
+import { CrawlerSettings } from './config/settings'
 import { HtmlParser } from './lib/parser'
 
 export type Parsers = {
@@ -16,8 +16,16 @@ export default class Crawler {
   static NO_OP_PARSER = new NoOpParser()
 
   parsers: Parsers
+  settings: CrawlerSettings
+  http: HttpClient
 
-  constructor (private http: HttpClient, parsers: Parsers = DEFAULT_PARSERS) {
+  constructor (
+    settings: CrawlerSettings,
+    http: HttpClient = new DefaultHttpClient(),
+    parsers: Parsers = DEFAULT_PARSERS
+  ) {
+    this.settings = settings
+    this.http = http
     this.parsers = Object.assign({}, DEFAULT_PARSERS, parsers)
   }
 
@@ -27,9 +35,9 @@ export default class Crawler {
     const parser = this.parsers[response.contentType] || Crawler.NO_OP_PARSER
 
     return parser.parse(response.content, {
-      linksSelector: settings.linksSelector,
+      linksSelector: this.settings.linksSelector,
       baseDomain: `${protocol}//${host}`,
-      includeExternalLinks: settings.includeExternalLinks
+      includeExternalLinks: this.settings.includeExternalLinks
     })
   }
 

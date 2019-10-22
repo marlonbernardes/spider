@@ -1,13 +1,12 @@
 import Crawler from './crawler'
-import { DefaultHttpClient } from './lib/http'
 import { save } from './es'
 import { CrawlingQueue, InMemoryCrawlingQueue } from './lib/queue'
 import { VisitedPagesCache, RedisCache } from './lib/cache'
+import settings from './config/settings'
 
 const cache: VisitedPagesCache = new RedisCache()
 const queue: CrawlingQueue = new InMemoryCrawlingQueue()
-const http = new DefaultHttpClient()
-const crawler = new Crawler(http)
+const crawler = new Crawler(settings.crawler)
 
 async function process (url: string) {
   try {

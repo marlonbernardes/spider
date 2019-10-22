@@ -5,11 +5,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "tsc -p agent/tsconfig.json",
-    "start": "node --inspect -r ts-node/register ./agent/src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node --inspect -r ts-node/register ./src/index.ts",
     "start:watch": "nodemon",
     "test": "jest",
-    "lint": "eslint ./agent/ --config ./agent/eslintrc.yml --ext .ts",
+    "lint": "eslint ./ --config ./eslintrc.yml --ext .ts",
     "lint:help": "eslint --help"
   },
   "repository": {
@@ -63,7 +63,7 @@
       "node_modules"
     ],
     "watch": [
-      "agent"
+      "src"
     ],
     "exec": "yarn start",
     "ext": "ts"

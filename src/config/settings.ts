@@ -1,4 +1,4 @@
-type CrawlerSettings = {
+export type CrawlerSettings = {
   // css selector used to obtain the links
   // contained in a certain page
   linksSelector: string
@@ -8,12 +8,12 @@ type CrawlerSettings = {
   includeExternalLinks: boolean
 }
 
-type RedisSettings = {
+export type RedisSettings = {
   host: string
   port: number
 }
 
-type KafkaSettings = {
+export type KafkaSettings = {
   topicName: string
   groupId: string
   clientId: string
@@ -21,7 +21,7 @@ type KafkaSettings = {
   port: number
 }
 
-type Settings = {
+export type Settings = {
   crawler: CrawlerSettings,
   cache: RedisSettings,
   queue: KafkaSettings

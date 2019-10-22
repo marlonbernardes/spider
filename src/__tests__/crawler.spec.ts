@@ -1,6 +1,7 @@
 import { lookup } from 'mime-types'
 import { OK } from 'http-status'
 import Crawler, { Parsers } from '../crawler'
+import settings from '../config/settings'
 import { HttpClient, HttpResponse } from '../lib/http'
 import { Parser, ParsedResponse } from '../lib/parser'
 
@@ -68,7 +69,7 @@ describe('crawler', () => {
       'application/json': jsonParser,
       'text/html': htmlParser
     }
-    crawler = new Crawler(http, parsers)
+    crawler = new Crawler(settings.crawler, http, parsers)
   })
 
   describe('when crawling an URL', () => {

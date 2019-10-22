@@ -6,7 +6,7 @@ parserOptions:
   ecmaVersion: 2018
   sourceType: 'module'
 extends:
-  - "../config/spider.eslint.yml"
+  - "./config/spider.eslint.yml"
 settings:
   "import/resolver":
     node:
