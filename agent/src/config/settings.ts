@@ -1,4 +1,4 @@
-interface Settings {
+type CrawlerSettings = {
   // css selector used to obtain the links
   // contained in a certain page
   linksSelector: string
@@ -8,9 +8,44 @@ interface Settings {
   includeExternalLinks: boolean
 }
 
+type RedisSettings = {
+  host: string
+  port: number
+}
+
+type KafkaSettings = {
+  topicName: string
+  groupId: string
+  clientId: string
+  host: string
+  port: number
+}
+
+type Settings = {
+  crawler: CrawlerSettings,
+  cache: RedisSettings,
+  queue: KafkaSettings
+}
+
 const settings: Settings = {
-  linksSelector: '[href]',
-  includeExternalLinks: false
+
+  crawler: {
+    linksSelector: '[href]',
+    includeExternalLinks: false,
+  },
+
+  queue: {
+    topicName: 'foo',
+    groupId: 'test',
+    clientId: 'test',
+    host: 'localhost',
+    port: 9092
+  },
+
+  cache: {
+    host: 'localhost',
+    port: 6379
+  }
 }
 
 export default settings
