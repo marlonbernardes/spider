@@ -1,7 +1,7 @@
-import { HttpClient, DefaultHttpClient } from './lib/http'
-import { Parser, NoOpParser } from './lib/parser'
-import { CrawlerSettings } from './config/settings'
-import { HtmlParser } from './lib/parser'
+import { HttpClient, DefaultHttpClient } from '../lib/http'
+import { Parser, NoOpParser } from '../lib/parser'
+import { CrawlerSettings } from '../config/settings'
+import { HtmlParser } from '../lib/parser'
 
 export type Parsers = {
   [contentType: string]: Parser
