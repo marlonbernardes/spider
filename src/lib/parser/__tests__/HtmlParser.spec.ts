@@ -22,7 +22,8 @@ describe('HtmlParser', () => {
       parsed: true,
       textContent: expect.anything(),
       links: expect.anything(),
-      keywords: expect.anything()
+      keywords: expect.anything(),
+      title: expect.anything()
     })
   })
 
@@ -31,9 +32,22 @@ describe('HtmlParser', () => {
     const response = parser.parse(html, options)
     expect(response).toEqual({
       parsed: true,
-      textContent: 'test page',
+      textContent: expect.stringContaining('test page'),
       links: expect.anything(),
-      keywords: expect.anything()
+      keywords: expect.anything(),
+      title: expect.anything()
+    })
+  })
+
+  it('should return the title', () => {
+    const html = fs.readFileSync(`${__dirname}/fixtures/no-anchor.html`, 'utf8')
+    const response = parser.parse(html, options)
+    expect(response).toEqual({
+      parsed: true,
+      textContent: expect.anything(),
+      links: expect.anything(),
+      keywords: expect.anything(),
+      title: 'Page title'
     })
   })
 
@@ -47,7 +61,8 @@ describe('HtmlParser', () => {
         'http://example.com/first',
         'http://example.com/second'
       ],
-      keywords: expect.anything()
+      keywords: expect.anything(),
+      title: expect.anything()
     })
   })
 
@@ -64,7 +79,8 @@ describe('HtmlParser', () => {
           'http://example.com/third',
           'http://test.com/'
         ],
-        keywords: expect.anything()
+        keywords: expect.anything(),
+        title: expect.anything()
       })
     })
 
@@ -82,7 +98,8 @@ describe('HtmlParser', () => {
           'http://example.com/second',
           'http://example.com/third'
         ],
-        keywords: expect.anything()
+        keywords: expect.anything(),
+        title: expect.anything()
       })
     })
   })

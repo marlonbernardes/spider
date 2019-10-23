@@ -1,9 +1,9 @@
 import { lookup } from 'mime-types'
 import { OK } from 'http-status'
 import Crawler, { Parsers } from '../crawler'
-import settings from '../config/settings'
-import { HttpClient, HttpResponse } from '../lib/http'
-import { Parser, ParsedResponse } from '../lib/parser'
+import settings from '../../config/settings'
+import { HttpClient, HttpResponse } from '../../lib/http'
+import { Parser, ParsedResponse } from '../../lib/parser'
 
 const MOCK_HTML_RESPONSE = '<html><body>this is a test page</body></html>'
 const MOCK_JSON_RESPONSE = '{ "foo": "bar" }'
@@ -32,7 +32,8 @@ class MockHtmlParser implements Parser {
       parsed: true,
       links: [],
       textContent: content.replace(/<[^>]*>/g, ''),
-      keywords: []
+      keywords: [],
+      title: ''
     }
 
     return response
@@ -47,7 +48,8 @@ class MockJsonParser implements Parser {
       parsed: true,
       links: [],
       textContent: content,
-      keywords: []
+      keywords: [],
+      title: ''
     }
 
     return response
@@ -80,7 +82,8 @@ describe('crawler', () => {
           parsed: true,
           links: [],
           textContent: 'this is a test page',
-          keywords: []
+          keywords: [],
+          title: ''
         })
     })
 
@@ -91,7 +94,8 @@ describe('crawler', () => {
           parsed: true,
           links: [],
           textContent: MOCK_JSON_RESPONSE,
-          keywords: []
+          keywords: [],
+          title: ''
         })
     })
   })
@@ -104,7 +108,8 @@ describe('crawler', () => {
           parsed: false,
           links: [],
           textContent: '',
-          keywords: []
+          keywords: [],
+          title: ''
         })
     })
   })

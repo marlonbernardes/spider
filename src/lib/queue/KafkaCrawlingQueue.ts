@@ -28,7 +28,7 @@ export class KafkaCrawlingQueue implements CrawlingQueue {
 
     await this.consumer.run({
       partitionsConsumedConcurrently: this.settings.concurrency,
-      eachMessage: async ({ topic, partition, message }) => {
+      eachMessage: async ({ message }) => {
         await callback(message.value.toString())
       }
     })

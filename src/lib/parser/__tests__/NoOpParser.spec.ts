@@ -13,7 +13,8 @@ describe('NoOpParser', () => {
       parsed: false,
       textContent: expect.anything(),
       links: expect.anything(),
-      keywords: expect.anything()
+      keywords: expect.anything(),
+      title: expect.anything()
     })
   })
 
@@ -23,7 +24,8 @@ describe('NoOpParser', () => {
       parsed: expect.anything(),
       textContent: expect.anything(),
       links: [],
-      keywords: []
+      keywords: [],
+      title: ''
     })
   })
 
@@ -33,7 +35,8 @@ describe('NoOpParser', () => {
       parsed: expect.anything(),
       textContent: '',
       links: expect.anything(),
-      keywords: expect.anything()
+      keywords: expect.anything(),
+      title: expect.anything()
     })
   })
 })

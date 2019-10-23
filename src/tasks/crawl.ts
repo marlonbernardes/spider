@@ -1,6 +1,6 @@
 import * as uuid from 'uuid'
 import { Task } from './types'
-import { run } from '../runner'
+import { run } from '../crawler/runner'
 import { CrawlingQueue, KafkaCrawlingQueue } from '../lib/queue'
 import settings from '../config/settings'
 

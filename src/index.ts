@@ -18,13 +18,13 @@ const questions = [
     name: 'url',
     message: 'What URL do you want to crawl?',
     default: 'https://monzo.com',
-    when: ({ action }: any) => action === 'crawl'
+    when: ({ action }: { action: string }) => action === 'crawl'
   },
   {
     type: 'text',
     name: 'filter',
     message: 'What do you want to search?',
-    when: ({ action }: any) => action === 'search'
+    when: ({ action }: { action: string }) => action === 'search'
   }
 ]
 

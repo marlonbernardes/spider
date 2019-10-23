@@ -22,7 +22,7 @@ export class ElasticSearchRepository implements Repository {
 
   async search (textContent: string) {
     await this.client.indices.refresh({ index: 'pages' })
-    return await this.client.search({
+    return this.client.search({
       index: 'pages',
       body: {
         query: {

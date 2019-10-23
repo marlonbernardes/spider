@@ -9,6 +9,18 @@ export const cache: VisitedPagesCache = new RedisCache(settings.cache)
 export const crawler = new Crawler(settings.crawler)
 export const repository: Repository = new ElasticSearchRepository(settings.search)
 
+function log (message: string) {
+  fs.appendFileSync(`${__dirname}/crawler.log`, `${message}\n`)
+}
+
+async function scheduleUnvisitedChildLinks (queue: CrawlingQueue, urls: string[]) {
+  for (const childUrl of urls) {
+    if (!await cache.isVisited(childUrl)) {
+      await queue.sendMessage([childUrl])
+    }
+  }
+}
+
 export async function run (consumerId: string, groupId: string) {
   const queue: CrawlingQueue = new KafkaCrawlingQueue(settings.queue, groupId)
 
@@ -32,14 +44,3 @@ export async function run (consumerId: string, groupId: string) {
   })
 }
 
-async function scheduleUnvisitedChildLinks (queue: CrawlingQueue, urls: string[]) {
-  for (const childUrl of urls) {
-    if (!await cache.isVisited(childUrl)) {
-      await queue.sendMessage([childUrl])
-    }
-  }
-}
-
-function log (message: string) {
-  fs.appendFileSync(`${__dirname}/crawler.log`, `${message}\n`)
-}

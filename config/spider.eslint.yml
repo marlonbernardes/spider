@@ -46,6 +46,8 @@ rules:
   "@typescript-eslint/semi": [error, never]
   "semi": off
 
+  "no-await-in-loop": off
+
   # Require 2-spaces indentation
   "@typescript-eslint/indent": [error, 2]
 
@@ -115,10 +117,14 @@ rules:
 
 # Relax some rules for test files
 overrides:
-  - files: ["*.spec.ts", "bin/*.ts"]
+  - files: ["*.spec.ts"]
     rules:
       "@typescript-eslint/no-explicit-any": off
       "@typescript-eslint/camelcase": off
       "no-console": off
       "max-classes-per-file": off
+
+  - files: ["src/tasks/*.ts", "scripts/*.ts"]
+    rules:
+      "no-console": off
 

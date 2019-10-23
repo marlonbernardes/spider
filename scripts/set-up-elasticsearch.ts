@@ -7,7 +7,9 @@ export async function setUp () {
 
   try {
     await client.indices.delete({ index: 'pages' })
-  } catch (e) {}
+  } catch (e) {
+    console.info('Index could not be deleted as it does not exist.')
+  }
 
   await client.indices.create({
     index: 'pages',
