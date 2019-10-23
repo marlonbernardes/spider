@@ -48,5 +48,5 @@ services:
     environment:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_ADVERTISED_HOST_NAME: 192.168.0.208
-      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_CREATE_TOPICS: "spider.crawling_queue:3:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
