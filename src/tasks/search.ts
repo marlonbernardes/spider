@@ -14,7 +14,11 @@ const task: Task<void> = async (answers: any) => {
     table.push([entry._source.title || '', entry._source.url || ''])
   }
 
-  console.log(table.toString())
+  if (table.length > 0) {
+    console.log(table.toString())
+  } else {
+    console.log('\nNo results found.\n')
+  }
 }
 
 export default task

@@ -6,6 +6,7 @@ const cache: VisitedPagesCache = new RedisCache(settings.cache)
 
 const task: Task<void> = async () => {
   await cache.clear()
+  console.log('Cache successfully cleared.')
 }
 
 export default task
