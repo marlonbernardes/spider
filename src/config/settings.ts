@@ -14,15 +14,19 @@ export type RedisSettings = {
 
 export type KafkaSettings = {
   topicName: string
-  groupId: string
-  clientId: string
   brokers: string[]
+  concurrency: number
+}
+
+export type ElasticSearchSettings = {
+  endpoint: string
 }
 
 export type Settings = {
   crawler: CrawlerSettings,
   cache: RedisSettings,
   queue: KafkaSettings
+  search: ElasticSearchSettings
 }
 
 const settings: Settings = {
@@ -33,14 +37,17 @@ const settings: Settings = {
 
   queue: {
     topicName: env.KAFKA_TOPIC_NAME,
-    groupId: env.KAFKA_GROUP_ID,
-    clientId: env.KAFKA_CLIENT_ID,
-    brokers: env.KAFKA_BROKERS.split(';')
+    brokers: env.KAFKA_BROKERS.split(';'),
+    concurrency: Number(env.KAFKA_CONSUMER_CONCURRENCY)
   },
 
   cache: {
     host: env.REDIS_HOST,
     port: Number(env.REDIS_PORT)
+  },
+
+  search: {
+    endpoint: env.ELASTIC_SEARCH_ENDPOINT,
   }
 }
 
