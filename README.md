@@ -7,8 +7,9 @@ Web crawler implementation for Monzo.
 ```sh
 # This will start kafka, elastic search and redis.
 docker-compose up -d
+
 yarn
-yarn setup
+yarn db:reset
 yarn start
 ```
 
@@ -22,7 +23,6 @@ yarn start
 | lint         | Lints the code using eslint               |
 | test         | Runs the unit/integration tests           |
 | test --watch | Runs the tests in watch mode              |
-
 
 # Architecture overview
 
@@ -38,6 +38,16 @@ This architecture diagram is still a WIP and is subject to change.
   - **Crawling agent**: performs HTTP requests to the target URL(s), parses the response and adds child links to a Kafka queue, so linked pages
   can also be crawled. Caches visited pages in Redis (in order speed things up and to prevent cycles) and index the parsed information in ElasticSearch.
   - **Search**: as of this moment is implemented as part of the crawling agent and can be invoked via CLI (refer to the demo above).
+
+### Tech stack/libraries
+
+- Kafka (client: [kafkajs](https://github.com/tulios/kafkajs))
+- ElasticSearch (client: [@elatic/elasticsearch](https://github.com/elastic/elasticsearch-js))
+- Redis (client: [ioredis](https://github.com/luin/ioredis/))
+- [Axios](https://github.com/axios/axios)
+- [cheerio](https://github.com/cheeriojs/cheerio)
+- [jest](https://github.com/facebook/jest)
+- [TypeScript](https://www.typescriptlang.org)
 
 
 ## Directory structure
