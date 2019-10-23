@@ -1,4 +1,4 @@
-# spider
+# 🕷️  Spider
 
 Web crawler implementation for Monzo.
 
