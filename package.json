@@ -5,11 +5,12 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "build": "tsc -p agent/tsconfig.json",
-    "start": "node --inspect -r ts-node/register ./agent/src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node -r ts-node/register ./src/index.ts",
+    "db:reset": "node -r ts-node/register ./scripts/set-up-elasticsearch.ts",
     "start:watch": "nodemon",
     "test": "jest",
-    "lint": "eslint ./agent/ --config ./agent/eslintrc.yml --ext .ts",
+    "lint": "eslint ./ --config ./eslintrc.yml --ext .ts",
     "lint:help": "eslint --help"
   },
   "repository": {
@@ -30,13 +31,24 @@
   },
   "homepage": "https://github.com/marlonbernardes/spider#readme",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.4.0",
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
+    "cli-table": "^0.3.1",
+    "dotenv": "^8.2.0",
     "http-status": "^1.4.0",
-    "mime-types": "^2.1.24"
+    "inquirer": "^7.0.0",
+    "ioredis": "^4.14.1",
+    "kafkajs": "^1.11.0",
+    "mime-types": "^2.1.24",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@types/cli-table": "^0.3.0",
+    "@types/uuid": "^3.4.5",
     "@types/cheerio": "^0.22.13",
+    "@types/inquirer": "^6.5.0",
+    "@types/ioredis": "^4.0.18",
     "@types/jest": "^24.0.19",
     "@types/mime-types": "^2.1.0",
     "@types/node": "^12.11.1",
@@ -59,7 +71,7 @@
       "node_modules"
     ],
     "watch": [
-      "agent"
+      "src"
     ],
     "exec": "yarn start",
     "ext": "ts"

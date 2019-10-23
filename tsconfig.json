@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl":  "./",
+    "target":  "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "lib": ["es6", "dom", "es2017"],
+    "types": ["node", "jest", "reflect-metadata"],
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "outDir": "dist",
+    "rootDir": "./src/"
+  }
+}
