@@ -4,13 +4,16 @@ import { CrawlingQueue, KafkaCrawlingQueue } from '../lib/queue'
 import Crawler from './crawler'
 import { VisitedPagesCache, RedisCache } from '../lib/cache'
 import settings from '../config/settings'
+import os from 'os'
+import path from 'path'
 
+export const LOG_FILE_PATH  = path.join(os.homedir(), 'crawler.log')
 export const cache: VisitedPagesCache = new RedisCache(settings.cache)
 export const crawler = new Crawler(settings.crawler)
 export const repository: Repository = new ElasticSearchRepository(settings.search)
 
 function log (message: string) {
-  fs.appendFileSync(`${__dirname}/crawler.log`, `${message}\n`)
+  fs.appendFileSync(LOG_FILE_PATH, `${message}\n`)
 }
 
 async function scheduleUnvisitedChildLinks (queue: CrawlingQueue, urls: string[]) {

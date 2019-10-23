@@ -1,6 +1,6 @@
 import * as uuid from 'uuid'
 import { Task } from './types'
-import { run } from '../crawler/runner'
+import { run, LOG_FILE_PATH } from '../crawler/runner'
 import { CrawlingQueue, KafkaCrawlingQueue } from '../lib/queue'
 import settings from '../config/settings'
 
@@ -21,7 +21,7 @@ const task: Task<void> = async (answers: any) => {
   console.log()
   console.log(`\t${answers.url} is being crawled.`)
   console.log('\tYou can check the progress by running the following command:')
-  console.log(`\t tail -f ${__dirname}/crawler.log`)
+  console.log(`\t tail -f ${LOG_FILE_PATH}`)
   console.log()
   console.log()
 }

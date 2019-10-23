@@ -2,7 +2,6 @@ import { HttpClient, DefaultHttpClient } from '../lib/http'
 import { Parser, NoOpParser, HtmlParser } from '../lib/parser'
 import { CrawlerSettings } from '../config/settings'
 
-
 export type Parsers = {
   [contentType: string]: Parser
 }

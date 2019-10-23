@@ -2,6 +2,8 @@
 
 Web crawler implementation for Monzo.
 
+![demo](https://user-images.githubusercontent.com/2975955/67439662-cc4b0180-f5ee-11e9-9298-7d803c7ca305.gif)
+
 ## First-time setup
 
 ```sh
