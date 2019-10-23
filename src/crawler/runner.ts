@@ -12,7 +12,7 @@ export const repository: Repository = new ElasticSearchRepository(settings.searc
 export async function run (consumerId: string, groupId: string) {
   const queue: CrawlingQueue = new KafkaCrawlingQueue(settings.queue, groupId)
 
-  await queue.onMessage(async function crawlUrl(url: string) {
+  await queue.onMessage(async (url: string) => {
     try {
       if (await cache.isVisited(url)) {
         log(`INFO\t [${consumerId}] Skipping ${url} as it's been crawled recently.`)
@@ -33,7 +33,7 @@ export async function run (consumerId: string, groupId: string) {
 }
 
 async function scheduleUnvisitedChildLinks (queue: CrawlingQueue, urls: string[]) {
-  for (let childUrl of urls) {
+  for (const childUrl of urls) {
     if (!await cache.isVisited(childUrl)) {
       await queue.sendMessage([childUrl])
     }
@@ -41,5 +41,5 @@ async function scheduleUnvisitedChildLinks (queue: CrawlingQueue, urls: string[]
 }
 
 function log (message: string) {
-  fs.appendFileSync(`${__dirname}/crawler.log`, message + '\n')
+  fs.appendFileSync(`${__dirname}/crawler.log`, `${message}\n`)
 }

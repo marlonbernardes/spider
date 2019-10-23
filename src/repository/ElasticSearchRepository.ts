@@ -7,7 +7,7 @@ export class ElasticSearchRepository implements Repository {
   client: Client
 
   constructor (settings: ElasticSearchSettings) {
-    this.client = new Client({ node:  settings.endpoint })
+    this.client = new Client({ node: settings.endpoint })
   }
 
   async save (page: Partial<Page>) {
@@ -31,5 +31,6 @@ export class ElasticSearchRepository implements Repository {
       }
     })
   }
+
 }
 

@@ -23,8 +23,8 @@ export type ElasticSearchSettings = {
 }
 
 export type Settings = {
-  crawler: CrawlerSettings,
-  cache: RedisSettings,
+  crawler: CrawlerSettings
+  cache: RedisSettings
   queue: KafkaSettings
   search: ElasticSearchSettings
 }
@@ -47,7 +47,7 @@ const settings: Settings = {
   },
 
   search: {
-    endpoint: env.ELASTIC_SEARCH_ENDPOINT,
+    endpoint: env.ELASTIC_SEARCH_ENDPOINT
   }
 }
 
