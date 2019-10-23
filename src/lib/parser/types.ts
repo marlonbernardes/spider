@@ -2,6 +2,7 @@ export interface ParsedResponse {
   parsed: boolean
   links: string[]
   textContent: string
+  title: string
   keywords?: string[]
 }
 

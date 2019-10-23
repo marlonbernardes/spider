@@ -6,6 +6,7 @@ export default class NoOpParser implements Parser {
     const response: ParsedResponse = {
       parsed: false,
       textContent: '',
+      title: '',
       links: [],
       keywords: []
     }

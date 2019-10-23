@@ -1,6 +1,7 @@
 import { Kafka, Producer, Consumer } from 'kafkajs'
 import { KafkaSettings } from '../../config/settings'
 import { CrawlingQueue, MessageHandler } from './types'
+import * as uuid from 'uuid'
 
 export class KafkaCrawlingQueue implements CrawlingQueue {
 
@@ -9,15 +10,14 @@ export class KafkaCrawlingQueue implements CrawlingQueue {
   producer: Producer
   settings: KafkaSettings
 
-  constructor(settings: KafkaSettings) {
+  constructor(settings: KafkaSettings, groupId: string = uuid.v4()) {
     this.kafka = new Kafka({
-      clientId: settings.clientId,
       brokers: settings.brokers
     })
 
     this.settings = settings
     this.producer = this.kafka.producer()
-    this.consumer = this.kafka.consumer({ groupId: settings.groupId })
+    this.consumer = this.kafka.consumer({ groupId })
   }
 
   async onMessage (callback: MessageHandler) {
@@ -27,15 +27,17 @@ export class KafkaCrawlingQueue implements CrawlingQueue {
     })
 
     await this.consumer.run({
+      partitionsConsumedConcurrently: this.settings.concurrency,
       eachMessage: async ({ topic, partition, message }) => {
         await callback(message.value.toString())
       }
     })
   }
 
-  async add (url: string[]) {
+  async sendMessage (url: string[]) {
     const messages = url.map(u => ({ value: u}))
-    await this.producer.send({ topic: 'test', messages })
+    const topic = this.settings.topicName
+    await this.producer.send({ topic, messages })
   }
 }
 
