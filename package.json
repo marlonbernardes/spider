@@ -1,7 +1,7 @@
 {
   "name": "spider",
   "version": "1.0.0",
-  "description": "Web crawler implementation for Monzo",
+  "description": "Web crawler implementation",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -18,7 +18,6 @@
     "url": "git+https://github.com/marlonbernardes/spider.git"
   },
   "keywords": [
-    "Monzo",
     "Web crawler",
     "Crawler",
     "Spider",

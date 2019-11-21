@@ -26,14 +26,14 @@ describe('KafkaCrawlingQueue', () => {
 
   describe('#sendMessage', () => {
     it('should send all URLS to the corresponding topic', () => {
-      const urls = ['http://example.com', 'https://monzo.com']
+      const urls = ['http://example.com', 'https://google.com']
       queue.sendMessage(urls)
       expect(send).toHaveBeenCalledTimes(1)
       expect(send).toHaveBeenCalledWith({
         topic: 'test-topic',
         messages: [
           { value: 'http://example.com' },
-          { value: 'https://monzo.com' }
+          { value: 'https://google.com' }
         ]
       })
     })

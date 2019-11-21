@@ -10,17 +10,17 @@ describe('DefaultHttpClient', () => {
 
   describe('when a page is found', () => {
     it('should return the corresponding status code', async () => {
-      const response = await client.get('https://monzo.com')
+      const response = await client.get('https://google.com')
       expect(response.status).toBe(OK)
     })
 
     it('should fetch HTML content for the specified URL', async () => {
-      const response = await client.get('https://monzo.com')
-      expect(response.content).toContain('Monzo')
+      const response = await client.get('https://google.com')
+      expect(response.content).toContain('Google')
     })
 
     it('should return the corresponding content type', async () => {
-      const response = await client.get('https://monzo.com')
+      const response = await client.get('https://google.com')
       expect(response.contentType).toEqual('text/html')
     })
   })

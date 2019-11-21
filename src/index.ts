@@ -17,7 +17,7 @@ const questions = [
     type: 'text',
     name: 'url',
     message: 'What URL do you want to crawl?',
-    default: 'https://monzo.com',
+    default: 'http://codeheaven.io',
     when: ({ action }: { action: string }) => action === 'crawl'
   },
   {

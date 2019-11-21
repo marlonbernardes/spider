@@ -1,6 +1,7 @@
 # 🕷️  Spider
 
-Web crawler implementation for Monzo.
+Web crawler implementation (learning exercise).
+Could be improved in many ways: missing connection pooling, automated performance tests & more.
 
 ![demo](https://user-images.githubusercontent.com/2975955/67439662-cc4b0180-f5ee-11e9-9298-7d803c7ca305.gif)
 
